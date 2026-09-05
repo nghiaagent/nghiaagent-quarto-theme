@@ -40,9 +40,9 @@ jobs:
           curl -fsSL https://raw.githubusercontent.com/r-lib/ir/main/scripts/install.sh | sh
           echo "$HOME/.local/bin" >> $GITHUB_PATH
 
-      - name: Render Showcase with ir
+      - name: Render Book with ir
         run: |
-          ir render example.qmd
+          ir render --with gt,reactable,plotly,ggplot2 .
 
       - name: Run Theme Invariant Assertions with testthat
         run: |
@@ -52,6 +52,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: theme-showcase-preview
-          path: |
-            example.html
-            example_files/
+          path: _book/

@@ -1,0 +1,52 @@
+---
+title: "Visualization Theming"
+ir:
+  packages:
+    - ggplot2
+    - plotly
+---
+
+## Overview
+
+This chapter demonstrates automatic adaptation of static plots and interactive HTML widgets in dark mode.
+
+## Static Figures with `ggplot2`
+
+Positron-style figure inversion automatically inverts and hue-rotates static images when the user switches to dark mode, preserving hue relationships while darkening the canvas.
+
+```{r}
+#| label: fig-ggplot
+#| fig-cap: "Scatter plot of vehicle weight versus fuel economy (mtcars)."
+library(ggplot2)
+
+ggplot(mtcars, aes(x = wt, y = mpg, color = factor(cyl))) +
+  geom_point(size = 3) +
+  theme_minimal(base_size = 13) +
+  labs(
+    title = "Vehicle Weight vs. Miles Per Gallon",
+    x = "Weight (1000 lbs)",
+    y = "Miles/(US) Gallon",
+    color = "Cylinders"
+  )
+```
+
+## Interactive Visualizations with `plotly`
+
+Interactive Plotly widgets are styled via widget-level dark inversion filters to integrate seamlessly into dark mode without requiring separate server rerenders.
+
+```{r}
+#| label: fig-plotly
+library(plotly)
+
+plot_ly(
+  iris,
+  x = ~Sepal.Length,
+  y = ~Petal.Length,
+  color = ~Species,
+  type = "scatter",
+  mode = "markers"
+) |>
+  layout(
+    title = "Iris Petal Length vs. Sepal Length"
+  )
+```

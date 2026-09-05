@@ -1,0 +1,35 @@
+---
+title: "Nghiaagent Quarto Theme"
+author: "Nghia Nguyen (Mitchell)"
+date: today
+---
+
+## Overview
+
+Welcome to the theme showcase book for `nghiaagent-quarto-theme`.
+This book demonstrates universal typography, table theming, plot inversion, and dual-column table of contents navigation.
+
+## Typography
+
+### Satoshi Font Hierarchy
+
+All headers and body copy inherit the Satoshi geometric sans-serif typeface:
+
+- `# Level 1 Header`
+- `## Level 2 Header`
+- `### Level 3 Header`
+- Regular paragraph text with proportional tracking and clean letter spacing.
+
+### JetBrains Mono & Inline Code Pills
+
+Inline code references like `mtcars`, `Sepal.Length`, and strain notation `C.1.2.3.4` use shaded background pills:
+
+```r
+# Sample R code block in JetBrains Mono
+summary(mtcars$mpg)
+```
+
+## Structure of This Book
+
+- **[Chapter 1: Table Theming](01_tables.qmd)**: `gt` and `reactable` styling in light and dark modes.
+- **[Chapter 2: Visualization Theming](02_visualizations.qmd)**: Static `ggplot2` figures and interactive `plotly` widgets.

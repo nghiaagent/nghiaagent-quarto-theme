@@ -6,27 +6,40 @@ library(testthat)
 library(xml2)
 
 test_dir <- getwd()
-html_file <- file.path(test_dir, "example.html")
+book_dir <- file.path(test_dir, "_book")
+index_file <- file.path(book_dir, "index.html")
+tables_file <- file.path(book_dir, "01_tables.html")
+viz_file <- file.path(book_dir, "02_visualizations.html")
 
-describe("nghiaagent-quarto-theme output verification", {
+describe("nghiaagent-quarto-theme book output verification", {
 
-  it("produces a valid non-empty HTML document", {
-    expect_true(file.exists(html_file), info = "example.html must exist")
-    expect_gt(file.info(html_file)$size, 1000)
+  it("produces a valid book structure with all chapters", {
+    expect_true(file.exists(index_file), info = "index.html must exist in _book/")
+    expect_true(file.exists(tables_file), info = "01_tables.html must exist in _book/")
+    expect_true(file.exists(viz_file), info = "02_visualizations.html must exist in _book/")
   })
 
-  html <- read_html(html_file)
+  html_index <- read_html(index_file)
+  html_tables <- read_html(tables_file)
+  html_viz <- read_html(viz_file)
 
-  # Extract inline styles
-  style_nodes <- xml_find_all(html, "//style")
+  it("renders both TOC columns (left sidebar navigation and right in-page TOC)", {
+    sidebar <- xml_find_all(html_index, "//*[@id='quarto-sidebar']")
+    expect_gt(length(sidebar), 0, label = "Left sidebar navigation (#quarto-sidebar)")
+
+    toc <- xml_find_all(html_index, "//*[@id='TOC']")
+    expect_gt(length(toc), 0, label = "Right in-page TOC (#TOC)")
+  })
+
+  # Extract inline styles and linked compiled Bootstrap bundles
+  style_nodes <- xml_find_all(html_index, "//style")
   inline_styles <- paste(xml_text(style_nodes), collapse = "\n")
 
-  # Extract linked styles (Bootstrap bundles where Quarto compiles theme SCSS)
-  link_nodes <- xml_find_all(html, "//link[@rel='stylesheet']")
+  link_nodes <- xml_find_all(html_index, "//link[@rel='stylesheet']")
   links_href <- xml_attr(link_nodes, "href")
-  valid_links <- links_href[file.exists(file.path(test_dir, links_href))]
+  valid_links <- links_href[file.exists(file.path(book_dir, links_href))]
   linked_css <- vapply(valid_links, function(f) {
-    p <- file.path(test_dir, f)
+    p <- file.path(book_dir, f)
     readChar(p, file.info(p)$size)
   }, character(1))
 
@@ -58,17 +71,19 @@ describe("nghiaagent-quarto-theme output verification", {
     expect_match(all_styles, "code:not(pre code)", fixed = TRUE, info = "Inline code pill styling must exist")
   })
 
-  it("contains real rendered gt, reactable, ggplot2, and plotly elements", {
-    gt_tables <- xml_find_all(html, ".//table[contains(@class, 'gt_table')]")
+  it("contains real rendered gt and reactable tables in 01_tables.html", {
+    gt_tables <- xml_find_all(html_tables, ".//table[contains(@class, 'gt_table')]")
     expect_gt(length(gt_tables), 0, label = "gt table elements")
 
-    reactable_nodes <- xml_find_all(html, ".//*[contains(@class, 'reactable') or contains(@class, 'Reactable')]")
+    reactable_nodes <- xml_find_all(html_tables, ".//*[contains(@class, 'reactable') or contains(@class, 'Reactable')]")
     expect_gt(length(reactable_nodes), 0, label = "reactable elements")
+  })
 
-    figures <- xml_find_all(html, ".//img[contains(@class, 'figure-img')]")
+  it("contains real rendered ggplot2 and plotly figures in 02_visualizations.html", {
+    figures <- xml_find_all(html_viz, ".//img[contains(@class, 'figure-img')]")
     expect_gt(length(figures), 0, label = "ggplot2 figure images")
 
-    plotly_nodes <- xml_find_all(html, ".//*[contains(@class, 'plotly') or contains(@class, 'js-plotly-plot')]")
+    plotly_nodes <- xml_find_all(html_viz, ".//*[contains(@class, 'plotly') or contains(@class, 'js-plotly-plot')]")
     expect_gt(length(plotly_nodes), 0, label = "plotly widget elements")
   })
 })
