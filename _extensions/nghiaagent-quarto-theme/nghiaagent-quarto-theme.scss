@@ -1,49 +1,95 @@
 /*-- scss:defaults --*/
 
+// =============================================================================
+// Typography & Font Imports
+// =============================================================================
 @import url('https://api.fontshare.com/v2/css?f[]=satoshi@900,700,500,400,300,901,701,501,401,301&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400..800;1,400..800&display=swap');
 
-// Base body font
-$font-family-sans-serif: 'Satoshi', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif !default;
+// Override Bootstrap/Bootswatch font variables without !default to guarantee precedence
+$font-family-sans-serif: 'Satoshi', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+$headings-font-family: 'Satoshi', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+$font-family-monospace: 'JetBrains Mono', SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 
-// Display font (headings, titles)
-$headings-font-family: 'Satoshi', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !default;
-
-// Monospace font (code blocks, inline code)
-$font-family-monospace: 'JetBrains Mono', SFMono-Regular, Menlo, Monaco, Consolas, monospace !default;
+// Ensure Bootstrap body font variables resolve to Satoshi
+$body-font-family: $font-family-sans-serif;
 
 /*-- scss:rules --*/
 
-// Body typography with Satoshi
-body {
-  font-family: 'Satoshi', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+// =============================================================================
+// Global Typography (All text in Satoshi; code in JetBrains Mono)
+// =============================================================================
+html, body {
+  font-family: 'Satoshi', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
 }
 
-// Display typography with Satoshi
+// Comprehensive font assignment across all document elements, navigation, UI, and tables
+h1, h2, h3, h4, h5, h6,
+.h1, .h2, .h3, .h4, .h5, .h6,
+.title, .quarto-title, .chapter-title, .sidebar-title,
+.book-title, .navbar-brand, .navbar, .nav, .nav-link,
+#quarto-sidebar, .sidebar, .sidebar-item, .sidebar-item-text, .chapter-number,
+#TOC, .table-of-contents, .toc-actions,
+.gt_table, .Reactable, table, .table,
+.callout, .callout-title, .callout-body,
+.breadcrumb, .breadcrumb-item,
+.footer, .nav-footer, .page-footer,
+button, input, select, textarea, .btn,
+.badge, .dropdown-menu, .dropdown-item,
+.modal, .popover, .tooltip,
+.nav-tabs, .nav-pills, .tab-content {
+  font-family: 'Satoshi', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+// Display headings letter-spacing
 h1, h2, h3, h4, h5, h6,
 .title, .quarto-title, .chapter-title, .sidebar-title,
 .book-title, .navbar-brand {
-  font-family: 'Satoshi', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   letter-spacing: -0.015em;
 }
 
-// Code typography with JetBrains Mono
-code, pre, pre code, kbd, samp, .sourceCode, div.sourceCode {
+// Monospace font strictly for code elements
+code, pre, pre code, kbd, samp, .sourceCode, div.sourceCode,
+.cell-output pre, .cell-output-stdout pre, .cell-output-stderr pre,
+tt, var {
   font-family: 'JetBrains Mono', SFMono-Regular, Menlo, Monaco, Consolas, monospace !important;
 }
 
-// Inline code styling within headings and navigation
+// =============================================================================
+// Shaded Inline Code Styling (Headings, TOC, Sidebar, Body Text)
+// =============================================================================
+
+// General inline code across body text (light mode)
+code:not(pre code),
+p code, li code, td code, th code, span code {
+  font-size: 0.875em;
+  color: var(--bs-code-color, #1a252f);
+  background-color: rgba(0, 0, 0, 0.06);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  padding: 0.15em 0.38em;
+  border-radius: 4px;
+  font-weight: 500;
+}
+
+// Inline code within headings, navigation, TOC, sidebar, and table titles (light mode)
 h1, h2, h3, h4, h5, h6,
 .title, .quarto-title, .chapter-title, .sidebar-title,
-#TOC, .sidebar, .breadcrumb {
+#TOC, .sidebar, .breadcrumb,
+.gt_title {
   code {
     font-size: 0.85em;
     color: inherit !important;
-    background-color: rgba(0, 0, 0, 0.06);
-    padding: 0.12em 0.35em;
+    background-color: rgba(0, 0, 0, 0.08);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    padding: 0.12em 0.38em;
     border-radius: 4px;
     font-weight: 500;
+    vertical-align: 0.05em;
   }
+}
+
+#TOC a:hover code {
+  background-color: rgba(0, 0, 0, 0.14);
 }
 
 // Selection highlight accent
@@ -52,7 +98,9 @@ h1, h2, h3, h4, h5, h6,
   color: inherit;
 }
 
-// GT table typography and consistency
+// =============================================================================
+// Table Theming: gt Tables
+// =============================================================================
 .gt_table {
   font-family: var(--bs-body-font-family);
 
@@ -62,20 +110,11 @@ h1, h2, h3, h4, h5, h6,
   }
 }
 
-// Reactable typography and consistency
-.Reactable {
-  font-family: var(--bs-body-font-family);
-
-  .rt-th {
-    font-family: $headings-font-family;
-    letter-spacing: -0.01em;
-  }
-}
-
 // Dark mode overrides for gt tables
 body.quarto-dark,
 [data-bs-theme="dark"] {
-  .gt_table {
+  .gt_table,
+  .gt_table_container {
     background-color: var(--bs-body-bg, #222222) !important;
     color: var(--bs-body-color, #dee2e6) !important;
     border-top-color: #444444 !important;
@@ -167,6 +206,18 @@ body.quarto-dark,
     background-color: var(--bs-body-bg, #222222) !important;
     color: #adb5bd !important;
     border-top-color: #444444 !important;
+  }
+}
+
+// =============================================================================
+// Table Theming: Reactable Tables
+// =============================================================================
+.Reactable {
+  font-family: var(--bs-body-font-family);
+
+  .rt-th {
+    font-family: $headings-font-family;
+    letter-spacing: -0.01em;
   }
 }
 
@@ -311,29 +362,41 @@ body.quarto-dark,
   }
 }
 
-// Dark mode overrides for code
+// =============================================================================
+// Dark Mode Code Styling Overrides
+// =============================================================================
 body.quarto-dark,
 [data-bs-theme="dark"] {
   // Inline code across dark mode document
-  code:not(pre code) {
-    background-color: rgba(255, 255, 255, 0.1) !important;
+  code:not(pre code),
+  p code, li code, td code, th code, span code {
     color: #f8f9fa !important;
-    padding: 0.15em 0.35em;
+    background-color: rgba(255, 255, 255, 0.12) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    padding: 0.15em 0.38em;
     border-radius: 4px;
   }
 
-  // Inline code within headings, TOC, sidebar, and breadcrumbs in dark mode
+  // Inline code within headings, TOC, sidebar, breadcrumbs, and table titles in dark mode
   h1, h2, h3, h4, h5, h6,
   .title, .quarto-title, .chapter-title, .sidebar-title,
-  #TOC, .sidebar, .breadcrumb {
+  #TOC, .sidebar, .breadcrumb,
+  .gt_title {
     code {
       color: inherit !important;
-      background-color: rgba(255, 255, 255, 0.14) !important;
+      background-color: rgba(255, 255, 255, 0.16) !important;
+      border: 1px solid rgba(255, 255, 255, 0.14) !important;
     }
+  }
+
+  #TOC a:hover code {
+    background-color: rgba(255, 255, 255, 0.24) !important;
   }
 }
 
-// Dark mode plot and figure color inversion (Positron-style)
+// =============================================================================
+// Dark Mode Plot & Figure Color Inversion (Positron-style)
+// =============================================================================
 body.quarto-dark,
 [data-bs-theme="dark"] {
   #quarto-document-content img:not(.no-invert),
@@ -342,15 +405,30 @@ body.quarto-dark,
   figure.figure img:not(.no-invert),
   .quarto-figure img:not(.no-invert),
   .panel-tabset img:not(.no-invert),
-  .tab-content img:not(.no-invert),
-  div.plotly.html-widget:not(.no-invert) {
+  .tab-content img:not(.no-invert) {
     filter: invert(0.9) hue-rotate(180deg);
     border-radius: var(--bs-border-radius, 4px);
     transition: filter 0.15s ease-in-out;
   }
 }
 
-// Background color for column page and wide layout sections
+// =============================================================================
+// Dark Mode Plotly Widget Color Inversion
+// =============================================================================
+body.quarto-dark,
+[data-bs-theme="dark"] {
+  div.plotly.html-widget:not(.no-invert),
+  .plotly.html-widget:not(.no-invert),
+  .js-plotly-plot:not(.no-invert) {
+    filter: invert(0.9) hue-rotate(180deg);
+    border-radius: var(--bs-border-radius, 4px);
+    transition: filter 0.15s ease-in-out;
+  }
+}
+
+// =============================================================================
+// Wide Layout & Column Page Solid Backgrounds
+// =============================================================================
 .column-page,
 .column_page,
 .column-page-inset,
@@ -367,12 +445,14 @@ body.quarto-dark,
 .page-columns .column-screen-inset {
   background-color: var(--bs-body-bg);
 
-  table {
+  table, .gt_table, .gt_table_container, .Reactable {
     background-color: var(--bs-body-bg);
   }
 }
 
-// Callout styling consistency
+// =============================================================================
+// UI Component Consistency: Callouts & Scrollbars
+// =============================================================================
 .callout {
   border-radius: var(--bs-border-radius, 4px);
   font-family: var(--bs-body-font-family);
@@ -400,13 +480,16 @@ body.quarto-dark,
   }
 }
 
-// Print media adjustments
+// =============================================================================
+// Print Media Adjustments
+// =============================================================================
 @media print {
   body.quarto-dark,
   [data-bs-theme="dark"] {
     #quarto-document-content img,
     .figure img,
-    div.plotly.html-widget {
+    div.plotly.html-widget,
+    .js-plotly-plot {
       filter: none !important;
     }
   }
