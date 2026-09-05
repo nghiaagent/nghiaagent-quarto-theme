@@ -50,10 +50,10 @@ format:
     theme:
       light:
         - flatly
-        - nghiaagent-quarto-theme
+        - _extensions/nghiaagent/nghiaagent-quarto-theme/nghiaagent-quarto-theme.scss
       dark:
         - darkly
-        - nghiaagent-quarto-theme
+        - _extensions/nghiaagent/nghiaagent-quarto-theme/nghiaagent-quarto-theme.scss
     respect-user-color-scheme: true
     monofont: "JetBrains Mono"
     code-fold: true
