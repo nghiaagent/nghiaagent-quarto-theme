@@ -1,0 +1,5 @@
+.DS_Store
+/.quarto/
+/site_libs/
+test/
+*.html

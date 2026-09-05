@@ -1,0 +1,501 @@
+/*-- scss:defaults --*/
+
+// =============================================================================
+// Typography & Font Imports
+// =============================================================================
+@import url('https://api.fontshare.com/v2/css?f[]=satoshi@900,700,500,400,300,901,701,501,401,301&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400..800;1,400..800&display=swap');
+
+// Override Bootstrap/Bootswatch font variables without !default to guarantee precedence
+$font-family-sans-serif: 'Satoshi', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+$headings-font-family: 'Satoshi', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+$font-family-monospace: 'JetBrains Mono', SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+
+// Ensure Bootstrap body font variables resolve to Satoshi
+$body-font-family: $font-family-sans-serif;
+
+/*-- scss:rules --*/
+
+// =============================================================================
+// Global Typography (All text in Satoshi; code in JetBrains Mono)
+// =============================================================================
+html, body {
+  font-family: 'Satoshi', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+// Comprehensive font assignment across all document elements, navigation, UI, and tables
+h1, h2, h3, h4, h5, h6,
+.h1, .h2, .h3, .h4, .h5, .h6,
+.title, .quarto-title, .chapter-title, .sidebar-title,
+.book-title, .navbar-brand, .navbar, .nav, .nav-link,
+#quarto-sidebar, .sidebar, .sidebar-item, .sidebar-item-text, .chapter-number,
+#TOC, .table-of-contents, .toc-actions,
+.gt_table, .Reactable, table, .table,
+.callout, .callout-title, .callout-body,
+.breadcrumb, .breadcrumb-item,
+.footer, .nav-footer, .page-footer,
+button, input, select, textarea, .btn,
+.badge, .dropdown-menu, .dropdown-item,
+.modal, .popover, .tooltip,
+.nav-tabs, .nav-pills, .tab-content {
+  font-family: 'Satoshi', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+// Display headings letter-spacing
+h1, h2, h3, h4, h5, h6,
+.title, .quarto-title, .chapter-title, .sidebar-title,
+.book-title, .navbar-brand {
+  letter-spacing: -0.015em;
+}
+
+// Monospace font strictly for code elements
+code, pre, pre code, kbd, samp, .sourceCode, div.sourceCode,
+.cell-output pre, .cell-output-stdout pre, .cell-output-stderr pre,
+tt, var {
+  font-family: 'JetBrains Mono', SFMono-Regular, Menlo, Monaco, Consolas, monospace !important;
+}
+
+// =============================================================================
+// Shaded Inline Code Styling (Headings, TOC, Sidebar, Body Text)
+// =============================================================================
+
+// General inline code across body text (light mode)
+code:not(pre code),
+p code, li code, td code, th code, span code {
+  font-size: 0.875em;
+  color: var(--bs-code-color, #1a252f);
+  background-color: rgba(0, 0, 0, 0.06);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  padding: 0.15em 0.38em;
+  border-radius: 4px;
+  font-weight: 500;
+}
+
+// Inline code within headings, navigation, TOC, sidebar, and table titles (light mode)
+h1, h2, h3, h4, h5, h6,
+.title, .quarto-title, .chapter-title, .sidebar-title,
+#TOC, .sidebar, .breadcrumb,
+.gt_title {
+  code {
+    font-size: 0.85em;
+    color: inherit !important;
+    background-color: rgba(0, 0, 0, 0.08);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    padding: 0.12em 0.38em;
+    border-radius: 4px;
+    font-weight: 500;
+    vertical-align: 0.05em;
+  }
+}
+
+#TOC a:hover code {
+  background-color: rgba(0, 0, 0, 0.14);
+}
+
+// Selection highlight accent
+::selection {
+  background-color: rgba(24, 188, 156, 0.25);
+  color: inherit;
+}
+
+// =============================================================================
+// Table Theming: gt Tables
+// =============================================================================
+.gt_table {
+  font-family: var(--bs-body-font-family);
+
+  .gt_title {
+    font-family: $headings-font-family;
+    letter-spacing: -0.015em;
+  }
+}
+
+// Dark mode overrides for gt tables
+body.quarto-dark,
+[data-bs-theme="dark"] {
+  .gt_table,
+  .gt_table_container {
+    background-color: var(--bs-body-bg, #222222) !important;
+    color: var(--bs-body-color, #dee2e6) !important;
+    border-top-color: #444444 !important;
+    border-bottom-color: #444444 !important;
+
+    th, td {
+      border-color: #444444 !important;
+    }
+
+    thead,
+    thead tr,
+    thead th,
+    thead td,
+    th.gt_col_heading,
+    .gt_col_heading,
+    th.gt_column_spanner_outer,
+    .gt_column_spanner_outer,
+    .gt_column_spanner,
+    tr.gt_spanner_row,
+    .gt_spanner_row,
+    tr.gt_col_headings,
+    .gt_col_headings,
+    thead.gt_col_headings {
+      background-color: #2d3238 !important;
+      color: #ffffff !important;
+      border-color: #444444 !important;
+    }
+  }
+
+  .gt_heading,
+  .gt_title,
+  .gt_subtitle {
+    background-color: var(--bs-body-bg, #222222) !important;
+  }
+
+  .gt_title {
+    color: #ffffff !important;
+  }
+
+  .gt_subtitle {
+    color: #adb5bd !important;
+  }
+
+  .gt_group_heading {
+    background-color: #262a2e !important;
+    color: #ffffff !important;
+    border-top-color: #444444 !important;
+    border-bottom-color: #444444 !important;
+  }
+
+  .gt_row {
+    background-color: var(--bs-body-bg, #222222) !important;
+    color: #dee2e6 !important;
+    border-top-color: #444444 !important;
+    border-bottom-color: #444444 !important;
+
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.05) !important;
+    }
+  }
+
+  .gt_striped {
+    background-color: rgba(255, 255, 255, 0.03) !important;
+  }
+
+  .gt_stub,
+  .gt_stub_row_group {
+    background-color: var(--bs-body-bg, #222222) !important;
+    color: #ffffff !important;
+    border-right-color: #444444 !important;
+  }
+
+  .gt_summary_row,
+  .gt_first_summary_row,
+  .gt_last_summary_row,
+  .gt_grand_summary_row,
+  .gt_first_grand_summary_row,
+  .gt_last_grand_summary_row_top {
+    background-color: #2d3238 !important;
+    color: #dee2e6 !important;
+    border-top-color: #444444 !important;
+    border-bottom-color: #444444 !important;
+  }
+
+  .gt_sourcenotes,
+  .gt_sourcenote,
+  .gt_footnotes,
+  .gt_footnote {
+    background-color: var(--bs-body-bg, #222222) !important;
+    color: #adb5bd !important;
+    border-top-color: #444444 !important;
+  }
+}
+
+// =============================================================================
+// Table Theming: Reactable Tables
+// =============================================================================
+.Reactable {
+  font-family: var(--bs-body-font-family);
+
+  .rt-th {
+    font-family: $headings-font-family;
+    letter-spacing: -0.01em;
+  }
+}
+
+// Dark mode overrides for reactables
+body.quarto-dark,
+[data-bs-theme="dark"] {
+  .Reactable {
+    background-color: var(--bs-body-bg, #222222) !important;
+    color: var(--bs-body-color, #dee2e6) !important;
+
+    .rt-table {
+      border-color: #444444 !important;
+    }
+
+    // Headers & Column Spanners
+    .rt-thead,
+    .rt-th,
+    .rt-th-group {
+      background-color: #2d3238 !important;
+      color: #ffffff !important;
+      border-color: #444444 !important;
+    }
+
+    .rt-th {
+      border-bottom: 2px solid #444444 !important;
+      border-left-color: #333333 !important;
+    }
+
+    .rt-th-group:after {
+      background-color: #444444 !important;
+    }
+
+    // Body & Cells
+    .rt-tbody {
+      background-color: var(--bs-body-bg, #222222) !important;
+    }
+
+    .rt-tr-group {
+      background-color: inherit !important;
+      border-color: #333333 !important;
+    }
+
+    .rt-td {
+      color: #dee2e6 !important;
+      border-top: 1px solid #333333 !important;
+      border-left-color: #333333 !important;
+    }
+
+    // Striped and Hover Rows
+    .rt-tr-striped {
+      background-color: rgba(255, 255, 255, 0.03) !important;
+    }
+
+    .rt-tr-highlight:hover {
+      background-color: rgba(255, 255, 255, 0.06) !important;
+    }
+
+    // Search Box
+    .rt-search {
+      background-color: #2d3238 !important;
+      color: #ffffff !important;
+      border: 1px solid #555555 !important;
+
+      &::placeholder {
+        color: #8c959f !important;
+      }
+
+      &:focus {
+        border-color: #888888 !important;
+        outline: none !important;
+        box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.1) !important;
+      }
+    }
+
+    // Column Filters
+    .rt-td-filter {
+      border-bottom: 1px solid #444444 !important;
+    }
+
+    .rt-filter {
+      background-color: #2d3238 !important;
+      color: #ffffff !important;
+      border: 1px solid #555555 !important;
+
+      &::placeholder {
+        color: #8c959f !important;
+      }
+
+      &:focus {
+        border-color: #888888 !important;
+        outline: none !important;
+        box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.1) !important;
+      }
+    }
+
+    // Pagination
+    .rt-pagination {
+      border-top: 1px solid #444444 !important;
+      color: #adb5bd !important;
+    }
+
+    .rt-page-jump,
+    .rt-page-size-select {
+      background-color: #2d3238 !important;
+      color: #ffffff !important;
+      border: 1px solid #555555 !important;
+    }
+
+    .rt-page-button {
+      color: #dee2e6 !important;
+
+      &:hover:not(:disabled) {
+        background-color: rgba(255, 255, 255, 0.08) !important;
+        color: #ffffff !important;
+      }
+
+      &:active:not(:disabled) {
+        background-color: rgba(255, 255, 255, 0.14) !important;
+      }
+
+      &.rt-page-button-current {
+        color: #ffffff !important;
+        font-weight: 700 !important;
+      }
+
+      &:disabled {
+        opacity: 0.4 !important;
+        color: #6c757d !important;
+      }
+    }
+
+    // Expanders
+    .rt-expander:after {
+      border-top-color: rgba(255, 255, 255, 0.8) !important;
+    }
+
+    // Checkboxes
+    input[type=checkbox].rt-select-input,
+    input[type=radio].rt-select-input {
+      accent-color: #0d6efd;
+    }
+  }
+}
+
+// =============================================================================
+// Dark Mode Code Styling Overrides
+// =============================================================================
+body.quarto-dark,
+[data-bs-theme="dark"] {
+  // Inline code across dark mode document
+  code:not(pre code),
+  p code, li code, td code, th code, span code {
+    color: #f8f9fa !important;
+    background-color: rgba(255, 255, 255, 0.12) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    padding: 0.15em 0.38em;
+    border-radius: 4px;
+  }
+
+  // Inline code within headings, TOC, sidebar, breadcrumbs, and table titles in dark mode
+  h1, h2, h3, h4, h5, h6,
+  .title, .quarto-title, .chapter-title, .sidebar-title,
+  #TOC, .sidebar, .breadcrumb,
+  .gt_title {
+    code {
+      color: inherit !important;
+      background-color: rgba(255, 255, 255, 0.16) !important;
+      border: 1px solid rgba(255, 255, 255, 0.14) !important;
+    }
+  }
+
+  #TOC a:hover code {
+    background-color: rgba(255, 255, 255, 0.24) !important;
+  }
+}
+
+// =============================================================================
+// Dark Mode Plot & Figure Color Inversion (Positron-style)
+// =============================================================================
+body.quarto-dark,
+[data-bs-theme="dark"] {
+  #quarto-document-content img:not(.no-invert),
+  .cell-output-display img:not(.no-invert),
+  .figure img:not(.no-invert),
+  figure.figure img:not(.no-invert),
+  .quarto-figure img:not(.no-invert),
+  .panel-tabset img:not(.no-invert),
+  .tab-content img:not(.no-invert) {
+    filter: invert(0.9) hue-rotate(180deg);
+    border-radius: var(--bs-border-radius, 4px);
+    transition: filter 0.15s ease-in-out;
+  }
+}
+
+// =============================================================================
+// Dark Mode Plotly Widget Color Inversion
+// =============================================================================
+body.quarto-dark,
+[data-bs-theme="dark"] {
+  div.plotly.html-widget:not(.no-invert),
+  .plotly.html-widget:not(.no-invert),
+  .js-plotly-plot:not(.no-invert) {
+    filter: invert(0.9) hue-rotate(180deg);
+    border-radius: var(--bs-border-radius, 4px);
+    transition: filter 0.15s ease-in-out;
+  }
+}
+
+// =============================================================================
+// Wide Layout & Column Page Solid Backgrounds
+// =============================================================================
+.column-page,
+.column_page,
+.column-page-inset,
+.column-page-left,
+.column-page-right,
+.column-screen,
+.column-screen-inset,
+.page-columns .column-page,
+.page-columns .column_page,
+.page-columns .column-page-inset,
+.page-columns .column-page-left,
+.page-columns .column-page-right,
+.page-columns .column-screen,
+.page-columns .column-screen-inset {
+  background-color: var(--bs-body-bg);
+
+  table, .gt_table, .gt_table_container, .Reactable {
+    background-color: var(--bs-body-bg);
+  }
+}
+
+// =============================================================================
+// UI Component Consistency: Callouts & Scrollbars
+// =============================================================================
+.callout {
+  border-radius: var(--bs-border-radius, 4px);
+  font-family: var(--bs-body-font-family);
+
+  .callout-title {
+    font-family: $headings-font-family;
+    font-weight: 600;
+  }
+}
+
+// Dark mode scrollbars
+body.quarto-dark,
+[data-bs-theme="dark"] {
+  *::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  *::-webkit-scrollbar-track {
+    background: #212529;
+  }
+  *::-webkit-scrollbar-thumb {
+    background-color: #495057;
+    border-radius: 4px;
+    border: 2px solid #212529;
+  }
+}
+
+// =============================================================================
+// Print Media Adjustments
+// =============================================================================
+@media print {
+  body.quarto-dark,
+  [data-bs-theme="dark"] {
+    #quarto-document-content img,
+    .figure img,
+    div.plotly.html-widget,
+    .js-plotly-plot {
+      filter: none !important;
+    }
+  }
+
+  body {
+    background-color: #ffffff !important;
+    color: #000000 !important;
+  }
+}
