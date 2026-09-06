@@ -1,0 +1,29 @@
+project:
+  type: book
+  output-dir: _book
+
+book:
+  title: "Nghiaagent Quarto Theme"
+  author: "Nghia Nguyen (Mitchell)"
+  date: today
+  repo-url: https://github.com/nghiaagent/nghiaagent-quarto-theme
+  chapters:
+    - index.qmd
+    - 01_tables.qmd
+    - 02_visualizations.qmd
+
+format:
+  html:
+    theme:
+      light:
+        - flatly
+        - _extensions/nghiaagent-quarto-theme/nghiaagent-quarto-theme.scss
+      dark:
+        - darkly
+        - _extensions/nghiaagent-quarto-theme/nghiaagent-quarto-theme.scss
+    respect-user-color-scheme: true
+    monofont: "JetBrains Mono"
+    number-depth: 3
+    code-fold: true
+    toc: true
+    toc-depth: 3

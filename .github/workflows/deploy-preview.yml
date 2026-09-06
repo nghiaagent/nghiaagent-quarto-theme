@@ -45,12 +45,9 @@ jobs:
           curl -fsSL https://raw.githubusercontent.com/r-lib/ir/main/scripts/install.sh | sh
           echo "$HOME/.local/bin" >> $GITHUB_PATH
 
-      - name: Render Showcase with ir
+      - name: Render Book with ir
         run: |
-          ir render example.qmd --output index.html
-          mkdir -p _site
-          mv index.html _site/
-          if [ -d example_files ]; then cp -r example_files _site/; fi
+          ir render --with gt,reactable,plotly,ggplot2 .
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
@@ -58,7 +55,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: "_site"
+          path: "_book"
 
       - name: Deploy to GitHub Pages
         id: deployment
