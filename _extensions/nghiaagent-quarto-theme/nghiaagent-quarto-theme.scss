@@ -5,40 +5,49 @@
 // =============================================================================
 @import url('https://api.fontshare.com/v2/css?f[]=satoshi@900,700,500,400,300,901,701,501,401,301&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400..800;1,400..800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Arimo:ital,wght@0,400..700;1,400..700&display=swap');
 
 // Override Bootstrap/Bootswatch font variables without !default to guarantee precedence
-$font-family-sans-serif: 'Satoshi', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+$font-family-sans-serif: 'Arimo', Arial, sans-serif;
 $headings-font-family: 'Satoshi', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 $font-family-monospace: 'JetBrains Mono', SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 
-// Ensure Bootstrap body font variables resolve to Satoshi
+// Ensure Bootstrap body font variables resolve to Arimo
 $body-font-family: $font-family-sans-serif;
 
 /*-- scss:rules --*/
 
 // =============================================================================
-// Global Typography (All text in Satoshi; code in JetBrains Mono)
+// Global Typography (headings in Satoshi, body and interface in Arimo, code in
+// JetBrains Mono). Arimo always loads from Google Fonts; it has the letter
+// widths of Helvetica and Arial.
 // =============================================================================
 html, body {
-  font-family: 'Satoshi', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  font-family: $font-family-sans-serif;
 }
 
-// Comprehensive font assignment across all document elements, navigation, UI, and tables
+// Headings and titles
 h1, h2, h3, h4, h5, h6,
 .h1, .h2, .h3, .h4, .h5, .h6,
 .title, .quarto-title, .chapter-title, .sidebar-title,
-.book-title, .navbar-brand, .navbar, .nav, .nav-link,
-#quarto-sidebar, .sidebar, .sidebar-item, .sidebar-item-text, .chapter-number,
+.book-title, .navbar-brand, .chapter-number,
+.callout-title {
+  font-family: $headings-font-family;
+}
+
+// Body text across navigation, UI and tables
+.navbar, .nav, .nav-link,
+#quarto-sidebar, .sidebar, .sidebar-item, .sidebar-item-text,
 #TOC, .table-of-contents, .toc-actions,
 .gt_table, .Reactable, table, .table,
-.callout, .callout-title, .callout-body,
+.callout, .callout-body,
 .breadcrumb, .breadcrumb-item,
 .footer, .nav-footer, .page-footer,
 button, input, select, textarea, .btn,
 .badge, .dropdown-menu, .dropdown-item,
 .modal, .popover, .tooltip,
 .nav-tabs, .nav-pills, .tab-content {
-  font-family: 'Satoshi', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  font-family: $font-family-sans-serif;
 }
 
 // Display headings letter-spacing
