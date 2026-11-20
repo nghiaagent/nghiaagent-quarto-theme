@@ -1,6 +1,6 @@
 # nghiaagent-quarto-theme
 
-A clean, modern, and accessible Quarto HTML theme extension featuring Satoshi and JetBrains Mono typography, automatic light/dark mode switching (`flatly` / `darkly`), comprehensive table theming (`gt` and `reactable`), Positron-style figure inversion, and solid wide-column layout backgrounds.
+A clean, modern, and accessible Quarto HTML theme extension featuring Satoshi, Arimo and JetBrains Mono typography, automatic light/dark mode switching (`flatly` / `darkly`), comprehensive table theming (`gt` and `reactable`), Positron-style figure inversion, and solid wide-column layout backgrounds.
 
 ---
 
@@ -9,7 +9,7 @@ A clean, modern, and accessible Quarto HTML theme extension featuring Satoshi an
 - **Light & Dark Mode Switching**: Paired with `flatly` (light) and `darkly` (dark) themes, honoring system preferences (`respect-user-color-scheme: true`) with an interactive toggle switch.
 - **Modern Typography**:
   - Display & Headings: [Satoshi](https://www.fontshare.com/fonts/satoshi) with refined tracking (`-0.015em`).
-  - Body: Satoshi for crisp readability.
+  - Body: [Arimo](https://fonts.google.com/specimen/Arimo), loaded from Google Fonts. It has the letter widths of Helvetica, so it matches figures drawn in Arimo.
   - Code & Monospace: [JetBrains Mono](https://www.jetbrains.com/lp/mono/) across code blocks, inline snippets, tables, and widgets.
   - Pill styling for inline code in headings, breadcrumbs, TOC, and sidebars.
 - **Table Theming**:
