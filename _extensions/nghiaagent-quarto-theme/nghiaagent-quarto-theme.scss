@@ -414,11 +414,23 @@ body.quarto-dark,
   figure.figure img:not(.no-invert),
   .quarto-figure img:not(.no-invert),
   .panel-tabset img:not(.no-invert),
-  .tab-content img:not(.no-invert) {
+  .tab-content img:not(.no-invert),
+  svg.inline-figure:not(.no-invert) {
     filter: invert(0.9) hue-rotate(180deg);
     border-radius: var(--bs-border-radius, 4px);
     transition: filter 0.15s ease-in-out;
   }
+}
+
+// =============================================================================
+// Inline SVG Figures (inline-svg.lua)
+// =============================================================================
+// Scale down with the column like Bootstrap's img-fluid, keeping the aspect
+// ratio from the SVG's width and height. Like an <img> the SVG stays inline,
+// so Quarto's figure alignment (text-align) still places it.
+svg.inline-figure {
+  max-width: 100%;
+  height: auto;
 }
 
 // =============================================================================
