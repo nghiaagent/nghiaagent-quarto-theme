@@ -86,4 +86,15 @@ describe("nghiaagent-quarto-theme book output verification", {
     plotly_nodes <- xml_find_all(html_viz, ".//*[contains(@class, 'plotly') or contains(@class, 'js-plotly-plot')]")
     expect_gt(length(plotly_nodes), 0, label = "plotly widget elements")
   })
+
+  it("places SVG figures inline, keeping their figure and caption", {
+    svg_imgs <- xml_find_all(html_viz, ".//img[contains(@src, '.svg')]")
+    expect_length(svg_imgs, 0)
+
+    inline <- xml_find_all(html_viz, ".//*[@id='fig-svg']//*[local-name()='svg' and contains(@class, 'inline-figure')]")
+    expect_length(inline, 1)
+
+    caption <- xml_find_all(html_viz, ".//*[@id='fig-svg']//figcaption")
+    expect_length(caption, 1)
+  })
 })

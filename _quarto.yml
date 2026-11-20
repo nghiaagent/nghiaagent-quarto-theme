@@ -27,3 +27,7 @@ format:
     code-fold: true
     toc: true
     toc-depth: 3
+
+# Inline SVG figures (the extension's inline-svg.lua)
+filters:
+  - nghiaagent-quarto-theme
