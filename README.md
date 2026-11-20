@@ -18,10 +18,6 @@ A clean, modern, and accessible Quarto HTML theme extension featuring Satoshi, A
 - **Positron-Style Plot Inversion**:
   - Automatically inverts static plots, figures, tabset images, and Plotly widgets in dark mode with smooth CSS transitions (`invert(0.9) hue-rotate(180deg)`).
   - Use class `.no-invert` to exempt specific figures, microscopy images, or diagrams.
-- **Inline SVG Figures** (`inline-svg.lua`):
-  - SVG figures are placed in the page instead of an `<img>`. A browser loads nothing for an SVG inside `<img>`, so web fonts the SVG imports (for example svglite's `web_fonts`) never arrive; inline, figures use the fonts the page loads.
-  - Captions, cross-references, tabsets and column layouts behave as they do with `<img>`. Inline figures scale down with the column and invert in dark mode.
-  - Use class `.no-inline` to keep a figure as an `<img>`.
 - **Solid Wide-Column Backgrounds**:
   - Prevents margin content and Table of Contents (TOC) bleed-through on wide sections (`.column-page`, `.column-page-inset`, `.column-screen`).
 - **Additional Polish**:
@@ -61,10 +57,6 @@ format:
     respect-user-color-scheme: true
     monofont: "JetBrains Mono"
     code-fold: true
-
-# Inline SVG figures. The contributed format below already includes this filter.
-filters:
-  - nghiaagent-quarto-theme
 ```
 
 Alternatively, you can use the contributed format name directly:

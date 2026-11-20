@@ -30,25 +30,6 @@ ggplot(mtcars, aes(x = wt, y = mpg, color = factor(cyl))) +
   )
 ```
 
-## Inline SVG Figures
-
-SVG figures are placed in the page instead of an `<img>`, so they use the page's fonts, scale with the column and invert in dark mode like any other figure.
-
-```{r}
-#| label: fig-svg
-#| fig-cap: "The same plot drawn as an SVG and placed inline."
-#| dev: svg
-ggplot(mtcars, aes(x = wt, y = mpg, color = factor(cyl))) +
-  geom_point(size = 3) +
-  theme_minimal(base_size = 13) +
-  labs(
-    title = "Vehicle Weight vs. Miles Per Gallon",
-    x = "Weight (1000 lbs)",
-    y = "Miles/(US) Gallon",
-    color = "Cylinders"
-  )
-```
-
 ## Interactive Visualizations with `plotly`
 
 Interactive Plotly widgets are styled via widget-level dark inversion filters to integrate seamlessly into dark mode without requiring separate server rerenders.
